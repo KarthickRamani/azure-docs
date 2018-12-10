@@ -43,7 +43,20 @@ Perform the following steps to prepare the drives.
 1.	Connect your disk drives to the Windows system via SATA connectors.
 1.  Create a single NTFS volume on each drive. Assign a drive letter to the volume. Do not use mountpoints.
 2.  Enable BitLocker encryption on the NTFS volume. If using a Windows Server system, use the instructions in [How to enable BitLocker on Windows Server 2012 R2](http://thesolving.com/storage/how-to-enable-bitlocker-on-windows-server-2012-r2/).
-3.  Copy data to encrypted volume. Use drag and drop or Robocopy or any such copy tool.
+3.  Copy data to encrypted volume. Use drag and drop or Robocopy or any such copy tool.  
+Follow the Azure naming requirements for container and blob names.
+
+    #### Azure naming conventions for container and blob names
+    |Entity   |Conventions  |
+    |---------|---------|
+    |Container names block blob and page blob     |Must start with a letter or number, and can contain only lowercase letters, numbers, and the hyphen (-). Every hyphen (-) must be immediately preceded and followed by a letter or number. Consecutive hyphens are not permitted in names. <br>Must be a valid DNS name, which is 3 to 63 characters long.          |
+    |Blob names for block blob and page blob    |Blob names are case-sensitive and can contain any combination of characters. <br>A blob name must be between 1 to 1,024 characters long.<br>Reserved URL characters must be properly escaped.<br>The number of path segments comprising the blob name cannot exceed 254. A path segment is the string between consecutive delimiter characters (for example, the forward slash '/') that correspond to the name of a virtual directory.         |
+
+    > [!IMPORTANT] 
+    > All the containers and blobs should conform to [Azure naming conventions](data-box-disk-limits.md#azure-block-blob-and-page-blob-naming-conventions). If these rules are not followed, the data upload to Azure will fail.
+
+
+
 4.	Open a PowerShell or command line window with administrative privileges. To change directory to the unzipped folder, run the following command:
     
     `cd C:\WaImportExportV1`
@@ -110,6 +123,10 @@ Perform the following steps to create an import job in the Azure portal.
 
     - Select the carrier from the dropdown list.
     - Enter a valid carrier account number that you have created with that carrier. Microsoft uses this account to ship the drives back to you once your import job is complete. If you do not have an account number, create a [FedEx](http://www.fedex.com/us/oadr/) or [DHL](http://www.dhl.com/) carrier account.
+    
+         [!TIP] 
+           > In case of not having an account number, you may create an individual waybill to send the disk to Microsoft. Use a Dummy                  Account number in the column with your carrier name (Example: 111111-Bluedart). Once the job is complete, Microsoft                    will contact you to create a return waybill. 
+        
     - Provide a complete and valid contact name, phone, email, street address, city, zip, state/province and country/region. 
         
         > [!TIP] 
